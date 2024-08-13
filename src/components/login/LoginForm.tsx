@@ -5,8 +5,10 @@ import { formSchema } from "../../utils/Validation";
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm: React.FC = () => {
+  const navigate = useNavigate();
   const [isPassword, setIsPassword] = useState(true);
   return (
     <div className="vstack border border-1 rounded-3 p-3 px-5 gap-3 shadow-lg">
@@ -19,6 +21,7 @@ const LoginForm: React.FC = () => {
         validationSchema={formSchema}
         onSubmit={(values) => {
           console.log(values);
+          navigate("/Home");
         }}>
         {({ errors, touched }) => (
           <Form className="vstack gap-3 ">
