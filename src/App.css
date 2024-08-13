@@ -1,0 +1,15 @@
+.error {
+    color: red;
+    padding-left: 3px;
+    margin-top: 2px;
+    font-size: 14px;
+}
+
+.feild-form {
+    outline: none;
+}
+
+.pass-icon {
+    font-size: larger;
+    cursor: pointer;
+}
