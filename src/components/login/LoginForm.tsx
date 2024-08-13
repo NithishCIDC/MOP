@@ -2,12 +2,15 @@ import { Field, Formik, Form } from "formik";
 import React, { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { formSchema } from "../../utils/Validation";
-import { IoEye, IoEyeOff } from "react-icons/io5";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import { FcGoogle } from "react-icons/fc";
 import { ImFacebook2 } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
+import { useAuthMutation } from "../../utils/ApiSlice";
+import Swal from "sweetalert2";
 
 const LoginForm: React.FC = () => {
+  const [auth] = useAuthMutation();
   const navigate = useNavigate();
   const [isPassword, setIsPassword] = useState(true);
   return (
@@ -19,9 +22,32 @@ const LoginForm: React.FC = () => {
           password: "",
         }}
         validationSchema={formSchema}
-        onSubmit={(values) => {
-          console.log(values);
-          navigate("/Home");
+        onSubmit={async (values) => {
+          try {
+            const res = await auth(values);
+            if (res.data.tokens.access.token) {
+              console.log(res.data);
+              sessionStorage.setItem("token", JSON.stringify(res.data.tokens.access.token));
+              sessionStorage.setItem("user", JSON.stringify(res.data.user));
+              navigate("/Home");
+            }
+          } catch {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "top-end",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              },
+            });
+            Toast.fire({
+              icon: "error",
+              title: "Invalid Credential",
+            });
+          }
         }}>
         {({ errors, touched }) => (
           <Form className="vstack gap-3 ">
@@ -38,9 +64,9 @@ const LoginForm: React.FC = () => {
                   placeholder="Password"
                 />
                 {isPassword ? (
-                  <IoEyeOff className="mx-3 pass-icon" onClick={() => setIsPassword(!isPassword)} />
+                  <IoEyeOffOutline className="mx-3 pass-icon" onClick={() => setIsPassword(!isPassword)} />
                 ) : (
-                  <IoEye className="mx-3 pass-icon" onClick={() => setIsPassword(!isPassword)} />
+                  <IoEyeOutline className="mx-3 pass-icon" onClick={() => setIsPassword(!isPassword)} />
                 )}
               </div>
               {touched.password && errors.password && <div className="error">{errors.password}</div>}
