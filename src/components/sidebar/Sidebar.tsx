@@ -1,9 +1,13 @@
 import React from "react";
 import logo from "../../assets/logo.png";
-import { Nav } from "react-bootstrap";
 import { navigationLinks } from "../../constant/Constant";
+import { Link } from "react-router-dom";
 
 const Sidebar: React.FC = () => {
+  const isActive = (path: string) => {
+    return window.location.pathname.includes(path) ? "nav-link-active text-decoration-none" : "nav-link";
+  };
+
   return (
     <div className="vh-100 d-flex flex-column">
       <div className="p-3">
@@ -11,21 +15,21 @@ const Sidebar: React.FC = () => {
       </div>
 
       <div className="fw-semibold d-flex flex-column gap-3 text-nowrap ps-4 mt-2">
-        <Nav activeKey="0">
-          {navigationLinks.slice(0, 12).map((link) => (
-            <Nav.Link eventKey={link.eventKey} key={link.eventKey} className="d-flex align-items-center gap-2 ">
-              <link.icon />
+        {navigationLinks.slice(0, 12).map((link) => (
+          <div key={link.path} className="d-flex align-items-center">
+            <Link to={link.path} className={`${isActive(link.path)} d-flex align-items-center`}>
+              <link.icon className="me-2 " />
               {link.label}
-            </Nav.Link>
-          ))}
-        </Nav>
+            </Link>
+          </div>
+        ))}
       </div>
       <div className="ps-4 mt-auto mb-5 fw-semibold">
         {navigationLinks.slice(12).map((link) => (
-          <Nav.Link eventKey={link.eventKey} key={link.eventKey} className="d-flex align-items-center gap-2">
-            <link.icon />
+          <Link to={link.path} key={link.path} className={`${isActive(link.path)} d-flex align-items-center`}>
+            <link.icon className="me-2 " />
             {link.label}
-          </Nav.Link>
+          </Link>
         ))}
       </div>
     </div>

@@ -19,3 +19,11 @@
     font-size: larger;
     cursor: pointer;
 }
+
+.Bg-color {
+    background-color: #F5F5F7;
+}
+
+.success {
+    color: #48C952 !important;
+}

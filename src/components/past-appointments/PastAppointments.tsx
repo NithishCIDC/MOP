@@ -1,0 +1,72 @@
+import React, { useEffect } from "react";
+import { Col, Row, Spinner, Table } from "react-bootstrap";
+import Sidebar from "../sidebar/Sidebar";
+import { useGetAppointmentsQuery } from "../../utils/ApiSlice";
+import moment from "moment";
+import { IoCallOutline } from "react-icons/io5";
+import profile from "../../assets/defaultUserMOP.svg";
+
+interface listType {
+  provider: { name: string };
+  appointmentDate: string;
+  appointmentTime: string;
+  contactMode: string;
+  status: string;
+}
+
+const PastAppointments: React.FC = () => {
+  const { data, isLoading } = useGetAppointmentsQuery([]);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  return (
+    <div>
+      <Row className="d-flex flex-nowrap m-0 p-0">
+        <Col className="d-flex m-0 me-3">
+          <Sidebar />
+        </Col>
+        <Col className="d-flex flex-fill p-5 Bg-color justify-content-center">
+          <div className="m-5 shadow-lg p-5 rounded-4 bg-white w-100">
+            <h2>Past Appointments</h2>
+            <Table className="mt-4">
+              <thead>
+                <tr className="text-center">
+                  <th className="text-start text-secondary opacity-75">PROVIDER</th>
+                  <th className="text-secondary opacity-75">TYPE</th>
+                  <th className="text-secondary opacity-75">REQUEST DATE & TIME</th>
+                  <th className="text-secondary opacity-75">STATUS</th>
+                </tr>
+              </thead>
+              <tbody>
+                {isLoading ? (
+                  <tr>
+                    <td colSpan={4} className="text-center">
+                      <Spinner animation="border" role="status" />
+                    </td>
+                  </tr>
+                ) : (
+                  data.remoteVisit.docs.map((list: listType, index: number) => (
+                    <tr key={index} className="text-center">
+                      <td className="text-start text-primary d-flex align-items-center gap-2">
+                        <img src={profile} alt="pro" className="img-fluid" width={30} />
+                        {list.provider.name}
+                      </td>
+                      <td>{list.contactMode === "AUDIO" && <IoCallOutline className="text-primary" />}</td>
+                      <td className="fw-semibold text-secondary opacity-75">
+                        {moment(list.appointmentDate).format("DD/MM/YY") + " " + list.appointmentTime}
+                      </td>
+                      <td className="success fw-semibold">{list.status}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </Table>
+          </div>
+        </Col>
+      </Row>
+    </div>
+  );
+};
+
+export default PastAppointments;
