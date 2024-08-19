@@ -5,8 +5,8 @@ import { aboutUsItems, individualItems, providerItems } from "../../constant/Con
 
 const Login: React.FC = () => {
   return (
-    <div className="vh-100 d-flex align-items-center">
-      <header className="d-flex align-items-center justify-content-between fixed-top">
+    <div className="vh-100 d-flex flex-column">
+      <header className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center gap-5 fw-bold fs-5">
           <img src={logo} alt="" width={150} className="img-fluid m-3" />
           <NavDropdown title="For Individuals">
@@ -38,14 +38,14 @@ const Login: React.FC = () => {
           <Button className="rounded-5 px-4 fw-semibold">Sign Up</Button>
         </div>
       </header>
-      <Container>
-        <Row>
-          <Col className="d-flex align-items-center justify-content-center border-end border-2 border-dark">
+      <Container className="flex-fill  align-content-center">
+        <Row className="gap-5">
+          <Col className="d-flex align-items-center  border-end border-2 border-dark">
             <div>
               <div className="display-3 fw-medium">Welcome Back</div>
             </div>
           </Col>
-          <Col className="d-flex justify-content-center ps-5">
+          <Col className="d-flex justify-content-center ps-5 pe-0">
             <LoginForm />
           </Col>
         </Row>

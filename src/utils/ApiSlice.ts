@@ -5,7 +5,7 @@ export const ApiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://devapi.myorthopedicproblem.com/v1",
     prepareHeaders: (headers) => {
-      const token = JSON.parse(sessionStorage.getItem("token") || "");
+      const token = sessionStorage.getItem("token");
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
       }
@@ -29,7 +29,7 @@ export const ApiSlice = createApi({
     }),
 
     getAppointments: builder.query({
-      query: () => `/schedule/appointment/list?limit=10&sortBy=createdAt&page=1`,
+      query: (page) => `/schedule/appointment/list?limit=10&sortBy=createdAt&page=${page}`,
       providesTags: ["user"],
     }),
   }),

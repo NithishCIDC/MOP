@@ -26,8 +26,7 @@ const LoginForm: React.FC = () => {
           try {
             const res = await auth(values);
             if (res.data.tokens.access.token) {
-              console.log(res.data);
-              sessionStorage.setItem("token", JSON.stringify(res.data.tokens.access.token));
+              sessionStorage.setItem("token", res.data.tokens.access.token);
               sessionStorage.setItem("user", JSON.stringify(res.data.user));
               navigate("/Home");
             }

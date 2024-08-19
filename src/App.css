@@ -27,3 +27,15 @@
 .success {
     color: #48C952 !important;
 }
+
+.hover:hover {
+    background-color: #ebebeb;
+}
+
+.hover {
+    user-select: none;
+}
+
+.break-select {
+    user-select: none;
+}

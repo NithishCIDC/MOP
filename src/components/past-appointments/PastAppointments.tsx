@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { Col, Row, Spinner, Table } from "react-bootstrap";
 import Sidebar from "../sidebar/Sidebar";
 import { useGetAppointmentsQuery } from "../../utils/ApiSlice";
 import moment from "moment";
 import { IoCallOutline } from "react-icons/io5";
 import profile from "../../assets/defaultUserMOP.svg";
+import Pagination from "./Pagination";
+import { AiOutlineMessage } from "react-icons/ai";
+import { BsCameraVideo } from "react-icons/bs";
 
 interface listType {
   provider: { name: string };
@@ -15,10 +18,8 @@ interface listType {
 }
 
 const PastAppointments: React.FC = () => {
-  const { data, isLoading } = useGetAppointmentsQuery([]);
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const [page, setPage] = useState(1);
+  const { data, isLoading, isSuccess } = useGetAppointmentsQuery(page);
 
   return (
     <div>
@@ -52,7 +53,12 @@ const PastAppointments: React.FC = () => {
                         <img src={profile} alt="pro" className="img-fluid" width={30} />
                         {list.provider.name}
                       </td>
-                      <td>{list.contactMode === "AUDIO" && <IoCallOutline className="text-primary" />}</td>
+                      <td className="text-primary fs-small">
+                        {(list.contactMode === "AUDIO" && <IoCallOutline />) ||
+                          (list.contactMode === "CHAT" && <AiOutlineMessage />) ||
+                          (list.contactMode === "VIDEO" && <BsCameraVideo />) ||
+                          "Office"}
+                      </td>
                       <td className="fw-semibold text-secondary opacity-75">
                         {moment(list.appointmentDate).format("DD/MM/YY") + " " + list.appointmentTime}
                       </td>
@@ -62,6 +68,7 @@ const PastAppointments: React.FC = () => {
                 )}
               </tbody>
             </Table>
+            <div>{isSuccess && <Pagination setPage={setPage} pageCount={data.remoteVisit.totalPages} page={page} />}</div>
           </div>
         </Col>
       </Row>
