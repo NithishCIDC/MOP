@@ -32,7 +32,20 @@ export const ApiSlice = createApi({
       query: (page) => `/schedule/appointment/list?limit=10&sortBy=createdAt&page=${page}`,
       providesTags: ["user"],
     }),
+
+    getCondition: builder.query({
+      query: (page) => `/content?active=true&limit=8&sortBy=-updatedAt&page=${page}`,
+      providesTags: ["user"],
+    }),
+    getImg: builder.query({
+      query: (img) => `/s3/signed/url?fileName=${img}`,
+      providesTags: ["user"],
+    }),
+    getFilter: builder.query({
+      query: (value) => `https://devapi.myorthopedicproblem.com/v1/content?active=true&limit=8&sortBy=-updatedAt&page=1&search=${value}`,
+      providesTags: ["user"],
+    }),
   }),
 });
 
-export const { useAuthMutation, useGetUserQuery, useGetAppointmentsQuery } = ApiSlice;
+export const { useAuthMutation, useGetUserQuery, useGetAppointmentsQuery, useGetConditionQuery, useGetImgQuery, useGetFilterQuery } = ApiSlice;

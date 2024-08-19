@@ -24,10 +24,10 @@ const PastAppointments: React.FC = () => {
   return (
     <div>
       <Row className="d-flex flex-nowrap m-0 p-0">
-        <Col className="d-flex m-0 me-3">
+        <Col className="d-flex m-0 me-3 sticky-top vh-100">
           <Sidebar />
         </Col>
-        <Col className="d-flex flex-fill p-5 Bg-color justify-content-center">
+        <Col className="d-flex flex-fill p-4 Bg-color justify-content-center">
           <div className="m-5 shadow-lg p-5 rounded-4 bg-white w-100">
             <h2>Past Appointments</h2>
             <Table className="mt-4">
