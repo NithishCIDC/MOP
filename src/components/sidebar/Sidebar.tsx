@@ -26,7 +26,11 @@ const Sidebar: React.FC = () => {
       </div>
       <div className="ps-4 mt-auto mb-5 fw-semibold">
         {navigationLinks.slice(12).map((link) => (
-          <Link to={link.path} key={link.path} className={`${isActive(link.path)} d-flex align-items-center`}>
+          <Link
+            to={link.path}
+            key={link.path}
+            className={`${isActive(link.path)} d-flex align-items-center`}
+            onClick={() => sessionStorage.removeItem("token")}>
             <link.icon className="me-2 " />
             {link.label}
           </Link>

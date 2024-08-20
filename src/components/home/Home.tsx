@@ -10,7 +10,7 @@ const Home: React.FC = () => {
         <Col className="d-flex m-0 me-3">
           <Sidebar />
         </Col>
-        <Col className="d-flex flex-fill">
+        <Col className="d-flex flex-fill p-5 Bg-color">
           <div>
             <h2>Hi,{user.firstName}</h2>
           </div>

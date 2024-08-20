@@ -44,7 +44,7 @@ export const navigationLinks = [
   { path: "10", icon: TbMessage, label: "Message" },
   { path: "11", icon: AiOutlineSafety, label: "Insurance" },
   { path: "12", icon: IoSettingsOutline, label: "Settings" },
-  { path: "13", icon: TbLogout2, label: "Log Out" },
+  { path: "/", icon: TbLogout2, label: "Log Out" },
 ];
 
 export const Options: { value: string; label: string }[] = [
