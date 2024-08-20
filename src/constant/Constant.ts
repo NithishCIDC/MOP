@@ -46,3 +46,15 @@ export const navigationLinks = [
   { path: "12", icon: IoSettingsOutline, label: "Settings" },
   { path: "13", icon: TbLogout2, label: "Log Out" },
 ];
+
+export const Options: { value: string; label: string }[] = [
+  { value: "62317ec862cde570bb7b82b1", label: "Hip" },
+  { value: "62317ed262cde570bb7b82b3", label: "Knee" },
+  { value: "62317ed862cde570bb7b82b5", label: "Shoulder" },
+  { value: "62317edf62cde570bb7b82b7", label: "Hand & Wrist" },
+  { value: "62317ee562cde570bb7b82b9", label: "Foot & Ankle" },
+  { value: "62317eec62cde570bb7b82bb", label: "Spine" },
+  { value: "6406bb2f2c03199bdbbc7f23", label: "Neck" },
+  { value: "6406bb452c03199bdbbc7f24", label: "Back" },
+  { value: "6406cfc02c03199bdbbc7f31", label: "Elbow" },
+];

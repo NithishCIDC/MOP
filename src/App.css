@@ -49,3 +49,19 @@
     max-width: 100%;
     height: 200px;
 }
+
+.custom-dropdown .dropdown-toggle::after {
+    display: none;
+}
+
+.custom-dropdown:hover {
+    border-color: transparent;
+}
+
+.select {
+    width: 250px;
+}
+
+.DItem:active {
+    background-color: white !important;
+}

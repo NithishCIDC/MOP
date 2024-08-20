@@ -12,8 +12,8 @@ export const EducationLibrary: React.FC = () => {
         <Col className="d-flex m-0 me-3 sticky-top vh-100">
           <Sidebar />
         </Col>
-        <Col className="d-flex flex-fill px-5 py-5 Bg-color justify-content-center overflow-auto">
-          <div className="col-11 shadow-lg p-5 m-5 rounded-4 bg-white ">
+        <Col className="d-flex flex-fill Bg-color justify-content-center overflow-auto p-5">
+          <div className="col-11 shadow-lg p-5 rounded-4 bg-white ">
             <div>
               <h1>Education Library</h1>
               <p>Learn more about different conditions and treatment options</p>
