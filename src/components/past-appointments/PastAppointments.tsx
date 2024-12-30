@@ -47,6 +47,7 @@ const PastAppointments: React.FC = () => {
                     </td>
                   </tr>
                 ) : (
+                  isSuccess ?
                   data.remoteVisit.docs.map((list: listType, index: number) => (
                     <tr key={index} className="text-center">
                       <td className="text-start text-primary d-flex align-items-center gap-2">
@@ -64,7 +65,12 @@ const PastAppointments: React.FC = () => {
                       </td>
                       <td className="success fw-semibold">{list.status}</td>
                     </tr>
-                  ))
+                  )) : 
+                  <tr>
+                    <td colSpan={4} className="text-center fw-semibold">
+                      No data found
+                    </td>
+                  </tr>
                 )}
               </tbody>
             </Table>
